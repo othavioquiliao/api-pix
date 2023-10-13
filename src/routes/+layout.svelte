@@ -8,8 +8,14 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
-<!-- App Shell -->
 <AppShell>
-	<!-- Page Route Content -->
+	<svelte:fragment slot="header">Header com o simbolo do crie_TI</svelte:fragment>
+	<!-- (sidebarLeft) -->
+	<!-- (sidebarRight) -->
+	<!-- (pageHeader) -->
+	<!-- Router Slot -->
 	<slot />
+	<!-- ---- / ---- -->
+	<!-- (pageFooter) -->
+	<svelte:fragment slot="footer">Footer</svelte:fragment>
 </AppShell>
