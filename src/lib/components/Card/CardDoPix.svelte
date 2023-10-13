@@ -6,12 +6,12 @@
 		name: string;
 	}[] = [];
 
-	let userReceiver: { recipientId: string; recipientName: string } = {
+	export let userReceiver: { recipientId: string; recipientName: string } = {
 		recipientId: '',
 		recipientName: ''
 	};
 
-	let userSender: { senderId: string; senderName: string } = {
+	export let userSender: { senderId: string; senderName: string } = {
 		senderId: '',
 		senderName: ''
 	};
@@ -20,26 +20,26 @@
 
 	let feedbackMessage: string = 'Algo deu errado';
 
-	function enviarPIX(): void {
-		// Obter os valores selecionados dos elementos <select>
-		userReceiver.recipientId = (
-			document.querySelector('.select-receiver') as HTMLSelectElement
-		).value;
-		userReceiver.recipientName = (
-			document.querySelector('.select-receiver') as HTMLSelectElement
-		).options[(document.querySelector('.select-receiver') as HTMLSelectElement).selectedIndex].text;
-		userSender.senderId = (document.querySelector('.select-sender') as HTMLSelectElement).value;
-		userSender.senderName = (document.querySelector('.select-sender') as HTMLSelectElement).options[
-			(document.querySelector('.select-sender') as HTMLSelectElement).selectedIndex
-		].text;
+	async function enviarPIX(): Promise<void> {
+		const selectReceiver = document.querySelector('.select-receiver') as HTMLSelectElement;
+		const selectSender = document.querySelector('.select-sender') as HTMLSelectElement;
+		const inputValor = document.querySelector('.input') as HTMLInputElement;
 
-		// Obter o valor do PIX do campo de entrada
-		valor = (document.querySelector('.input') as HTMLInputElement).value;
+		if (!selectReceiver.value || !selectSender.value || !inputValor.value) {
+			feedbackMessage = 'Por favor, preencha todos os campos.';
+			return;
+		}
+
+		userReceiver.recipientId = selectReceiver.value;
+		userReceiver.recipientName = selectReceiver.options[selectReceiver.selectedIndex].text;
+		userSender.senderId = selectSender.value;
+		userSender.senderName = selectSender.options[selectSender.selectedIndex].text;
+
+		valor = inputValor.value;
 
 		// Realizar a lógica real para enviar PIX com os dados coletados
 		// (substitua este comentário pela lógica real)
 
-		// Exibir feedback ao usuário
 		feedbackMessage = `PIX de ${valor} para ${userReceiver.recipientName} enviado com sucesso de ${userSender.senderName}.`;
 	}
 </script>
