@@ -1,15 +1,16 @@
 <script lang="ts">
-	import '../app.postcss';
+	import '../app.css';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
+	import HeaderCrie from '$lib/components/HeaderCrie/HeaderCrie.svelte';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
 <AppShell>
-	<svelte:fragment slot="header">Header com o simbolo do crie_TI</svelte:fragment>
+	<svelte:fragment slot="header"><HeaderCrie /></svelte:fragment>
 	<!-- (sidebarLeft) -->
 	<!-- (sidebarRight) -->
 	<!-- (pageHeader) -->
