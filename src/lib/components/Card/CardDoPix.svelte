@@ -44,7 +44,7 @@
 	}
 </script>
 
-<div class="card flex w-1/3 text-center flex-col items-center">
+<div class="card flex w-1/3 h-fit text-center pb-5 flex-col items-center">
 	<label class="label p-5">
 		<span class="label-text crieColor text-lg font-bold">Quem enviar o PIX:</span>
 		<select class="select text-center select-sender">
@@ -55,7 +55,7 @@
 		</select>
 	</label>
 	<label class="label p-5">
-		<span class="label-text crieColor text-lg font-bold">quem receber o PIX:</span>
+		<span class="label-text crieColor text-lg font-bold">Quem receber o PIX:</span>
 		<select class="select text-center select-receiver">
 			<option value="">Escolha um nome</option>
 			{#each users as user}
@@ -63,13 +63,13 @@
 			{/each}
 		</select>
 	</label>
-	<label class="label flex items-center p-4">
-		<span class="pr-10 crieColor text-lg font-bold">Valor:</span>
-		<input class="input w-32" title="valor" type="number" placeholder="0" />
+	<label class="label flex flex-col md:flex-row items-center p-4">
+		<span class="pr-5 crieColor text-lg font-bold">Valor:</span>
+		<input class="input w-24" title="valor" type="number" placeholder="0" />
 	</label>
 
-	<button type="button" class="btn variant-ghost w-1/3 mt-10" on:click={enviarPIX}>
-		<span><CircleDollarSign /> </span>
+	<button type="button" class="btn variant-ghost min-w-min w-1/3 mt-5" on:click={enviarPIX}>
+		<span class="crieColor"><CircleDollarSign /> </span>
 		<span>Enviar PIX</span>
 	</button>
 
