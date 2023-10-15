@@ -1,13 +1,9 @@
-// import type { PageServerLoad } from './$types';
-// export const load: PageServerLoad = async ({ fetch }) => {
-// 	const users = await fetch('http://177.44.248.24/pix-api/users').then((r) => r.json());
-// 	const usersPix = await fetch('http://177.44.248.24/pix-api/pix').then((r) => r.json());
+import type { Actions } from './$types';
 
-// 	return {
-// 		status: 200,
-// 		body: {
-// 			users,
-// 			usersPix
-// 		}
-// 	};
-// };
+export const actions = {
+	enviarPix: async (event) => {
+		const formData = Object.fromEntries(await event.request.formData());
+
+		console.log(formData);
+	}
+} satisfies Actions;
