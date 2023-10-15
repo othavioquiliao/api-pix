@@ -1,7 +1,9 @@
 import type { LayoutServerLoad } from './$types';
+import { API_KEY_PIX, API_KEY_USERS } from '$env/static/private';
+
 export const load: LayoutServerLoad = async ({ fetch }) => {
-	const users = await fetch('http://177.44.248.24/pix-api/users').then((r) => r.json());
-	const usersPix = await fetch('http://177.44.248.24/pix-api/pix').then((r) => r.json());
+	const users = await fetch(API_KEY_USERS).then((r) => r.json());
+	const usersPix = await fetch(API_KEY_PIX).then((r) => r.json());
 
 	return {
 		status: 200,

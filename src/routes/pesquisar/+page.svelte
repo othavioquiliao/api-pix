@@ -4,27 +4,27 @@
 	let usersPix = originalUsersPix.slice(); // Use uma cópia dos dados originais para filtragem
 	console.log(usersPix);
 
-	let pesquisarField = '';
+	let pesquisar = '';
 
 	$: usersPix = originalUsersPix.filter(
-		(pix: { sender: { name: string }; recipient: { name: string } }) => {
+		(pix: { sender: { name: string }; recipient: { name: string }; id: any }) => {
 			return (
-				pix.sender.name.toLowerCase().includes(pesquisarField.toLowerCase()) ||
-				pix.recipient.name.toLowerCase().includes(pesquisarField.toLowerCase())
+				pix.sender.name.toLowerCase().includes(pesquisar.toLowerCase()) ||
+				pix.recipient.name.toLowerCase().includes(pesquisar.toLowerCase()) ||
+				pix.id.toString().toLowerCase().includes(pesquisar.toLowerCase())
 			);
 		}
 	);
 </script>
 
-<div class="table-container">
+<div class="table-container flex flex-col items-center w-full min-w-fit">
 	<input
-		class="input input-bordered w-1/3 mb-5"
+		class="input input-bordered w-1/4 mb-5 ml-auto mr-44 min-w-fit"
 		type="text"
-		placeholder="Search..."
-		bind:value={pesquisarField}
+		placeholder="Pesquisar..."
+		bind:value={pesquisar}
 	/>
-	<!-- Native Table Element -->
-	<table class="table table-hover">
+	<table class="table table-hover w-4/5 min-h-fit">
 		<thead>
 			<tr class="crieColor">
 				<th>ID</th>
