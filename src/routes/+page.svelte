@@ -66,7 +66,7 @@
 		>
 			<label class="label p-5">
 				<span class="label-text crieColor text-lg font-bold">Quem enviar o PIX:</span>
-				<select class="select text-center select-sender">
+				<select class="select text-center select-sender" name="senderId">
 					<option value="">Escolha um nome</option>
 					{#each users as user}
 						<option value={user.id}> {user.name} </option>
@@ -75,7 +75,7 @@
 			</label>
 			<label class="label p-5">
 				<span class="label-text crieColor text-lg font-bold">Quem receber o PIX:</span>
-				<select class="select text-center select-receiver">
+				<select class="select text-center select-receiver" name="recipientId">
 					<option value="">Escolha um nome</option>
 					{#each users as user}
 						<option value={user.id}> {user.name} </option>
@@ -84,7 +84,7 @@
 			</label>
 			<label class="label flex flex-col md:flex-row items-center p-4">
 				<span class="pr-5 crieColor text-lg font-bold">Valor:</span>
-				<input class="input w-24" title="valor" type="number" placeholder="0" />
+				<input class="input w-24" title="valor" type="number" placeholder="0" name="value" />
 			</label>
 
 			<button type="submit" class="btn variant-ghost min-w-min w-1/3 mt-5" on:click={enviarPIX}>
@@ -94,6 +94,7 @@
 
 			<p class="mt-8">{feedbackMessage}</p>
 		</form>
+
 		<TableUsers {usersPix} />
 	</div>
 </div>
