@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { Paginator } from '@skeletonlabs/skeleton';
-	import { enhance } from '$app/forms';
 	import TableUsers from '$lib/components/TableUsers/TableUsers.svelte';
 	import { CircleDollarSign } from 'lucide-svelte';
+	import { getToastStore } from '@skeletonlabs/skeleton';
+
+	const toastStore = getToastStore();
 
 	// Tipagem para dados
 	interface User {
@@ -36,17 +37,25 @@
 	// Valor
 	let valor: string = '';
 
-	// Mensagem de feedback
-	let feedbackMessage: string = '';
-
 	// Função para validar e enviar o Pix e find para encontrar o nome do usuário
-	async function validarDados(): Promise<void> {
+	async function handleSubmit(): Promise<void> {
+		let t: any;
 		if (!userReceiver.id || !userSender.id || !valor) {
-			feedbackMessage = 'Por favor, preencha todos os campos.';
+			t = {
+				message: 'Por favor, preencha todos os campos.',
+				timeout: 5000
+			};
 		} else if (userReceiver.id === userSender.id) {
-			feedbackMessage = 'Não é possível enviar PIX para você mesmo.';
+			t = {
+				message: 'Não é possível enviar PIX para você mesmo.',
+				timeout: 5000
+			};
 		} else if (Number(valor) <= 0) {
-			feedbackMessage = 'Não é possível enviar PIX com valor menor ou igual a zero.';
+			t = {
+				message: 'Não é possivel fazer um Pix de R$0,00 ou menos.',
+				timeout: 5000
+			};
+			toastStore.trigger(t);
 		} else {
 			const senderUser = users.find((user) => user.id === userSender.id);
 			const receiverUser = users.find((user) => user.id === userReceiver.id);
@@ -54,9 +63,17 @@
 			if (senderUser && receiverUser) {
 				userSender.name = senderUser.name;
 				userReceiver.name = receiverUser.name;
-				feedbackMessage = `PIX de ${valor} enviado de ${userSender.name} para ${userReceiver.name} com sucesso!`;
+				t = {
+					message: `PIX de ${valor} enviado de ${userSender.name} para ${userReceiver.name} com sucesso!`,
+					timeout: 5000
+				};
+				toastStore.trigger(t);
 			} else {
-				feedbackMessage = 'Remetente ou destinatário não encontrado.';
+				t = {
+					message: 'Remetente ou destinatário não encontrado.',
+					timeout: 5000
+				};
+				toastStore.trigger(t);
 			}
 		}
 	}
@@ -68,7 +85,6 @@
 		<form
 			method="post"
 			action="?/enviarPix"
-			use:enhance
 			class="card flex w-1/3 h-fit text-center pb-5 flex-col items-center"
 		>
 			<label class="label p-5">
@@ -110,12 +126,10 @@
 				/>
 			</label>
 
-			<button type="submit" class="btn variant-ghost min-w-min w-1/3 mt-5" on:click={validarDados}>
+			<button type="submit" class="btn variant-ghost min-w-min w-1/3 mt-5" on:click={handleSubmit}>
 				<span class="crieColor"><CircleDollarSign /></span>
 				<span>Enviar PIX</span>
 			</button>
-
-			<p class="mt-8">{feedbackMessage}</p>
 		</form>
 
 		<TableUsers {usersPix} />

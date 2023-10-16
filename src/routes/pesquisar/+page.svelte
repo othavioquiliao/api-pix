@@ -17,9 +17,9 @@
 	);
 </script>
 
-<div class="table-container flex flex-col items-center w-full min-w-fit">
+<div class="w-full table-container flex justify-center flex-col items-center">
 	<input
-		class="input input-bordered w-1/4 mb-5 ml-auto mr-44 min-w-fit"
+		class="input input-bordered w-1/4 mb-5 min-w-fit"
 		type="text"
 		placeholder="Pesquisar..."
 		bind:value={pesquisar}
