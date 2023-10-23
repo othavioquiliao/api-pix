@@ -15,7 +15,7 @@
 	interface Data {
 		body: {
 			users: User[];
-			usersPix: any; // Add the appropriate type for usersPix
+			usersPix: any; // Precisa validar o dado certo
 		};
 	}
 
@@ -25,7 +25,7 @@
 	let users: User[] = data.body.users;
 	let usersPix = data.body.usersPix;
 
-	// Data of who sent or received the PIX
+	// Dados de quem envia e recebeu o PIX
 	let userReceiver: User = {
 		id: '',
 		name: ''
@@ -46,7 +46,7 @@
 		userNotFound: 'Remetente ou destinatário não encontrado.'
 	};
 
-	// Function to validate and send the PIX and find to locate the user's name
+	// Função para enviar o PIX e validar os campos
 	async function handleSubmit(): Promise<void> {
 		if (!userReceiver.id || !userSender.id || !valor) {
 			toastStore.trigger({ message: validationMessages.emptyFields, timeout: 5000 });
