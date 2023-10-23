@@ -1,5 +1,5 @@
 # Baixe a aplicação:
-Rode: 
+- Dentro da pasta da aplicação rode: 
 > npm i
 
 ou
@@ -14,4 +14,4 @@ ou
 
 
 
-Estas rotas de API foram fornecidas para pratica durante o Bootcamp Crie_TI
+*Estas rotas de API foram fornecidas para pratica durante o Bootcamp Crie_TI
