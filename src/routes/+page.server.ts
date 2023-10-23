@@ -7,23 +7,23 @@ export const actions = {
 		const data = Object.fromEntries(formData.entries());
 		console.log(data);
 
-		// try {
-		// 	const response = await fetch(API_KEY_PIX, {
-		// 		method: 'POST',
-		// 		headers: {
-		// 			'Content-Type': 'application/json' // Defina o tipo de conteúdo conforme necessário
-		// 		},
-		// 		body: JSON.stringify(data) // Converte os dados em JSON e envia no corpo da requisição
-		// 	});
+		try {
+			const response = await fetch(API_KEY_PIX, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json' // Defina o tipo de conteúdo conforme necessário
+				},
+				body: JSON.stringify(data) // Converte os dados em JSON e envia no corpo da requisição
+			});
 
-		// 	if (!response.ok) {
-		// 		throw new Error('Erro na requisição da API');
-		// 	}
+			if (!response.ok) {
+				throw new Error('Erro na requisição da API');
+			}
 
-		// 	const responseData = await response.json();
-		// 	console.log('Resposta da API:', responseData);
-		// } catch (error) {
-		// 	console.error('Ocorreu um erro:', error);
-		// }
+			const responseData = await response.json();
+			console.log('Resposta da API:', responseData);
+		} catch (error) {
+			console.error('Ocorreu um erro:', error);
+		}
 	}
 } satisfies Actions;

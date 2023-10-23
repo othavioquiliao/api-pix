@@ -2,6 +2,7 @@
 	import TableUsers from '$lib/components/TableUsers/TableUsers.svelte';
 	import { CircleDollarSign } from 'lucide-svelte';
 	import { getToastStore } from '@skeletonlabs/skeleton';
+	import { enhance } from '$app/forms';
 
 	const toastStore = getToastStore();
 
@@ -33,7 +34,6 @@
 		id: '',
 		name: ''
 	};
-	$: console.log('sender e reciver', userReceiver, userSender); // Para verificar se os dados estão sendo atualizados
 	// Valor
 	let valor: string = '';
 
@@ -84,6 +84,7 @@
 	<div class="flex w-5/6 gap-5 flex-wrap justify-center">
 		<form
 			method="post"
+			use:enhance
 			action="?/enviarPix"
 			class="card flex w-1/3 h-fit text-center pb-5 flex-col items-center"
 		>
