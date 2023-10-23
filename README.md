@@ -14,4 +14,4 @@ ou
 
 
 
-*Estas rotas de API foram fornecidas para pratica durante o Bootcamp Crie_TI
+Estas rotas de API foram fornecidas para pratica durante o Bootcamp Crie_TI
