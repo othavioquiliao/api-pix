@@ -40,12 +40,11 @@
 			{/each}
 		</tbody>
 	</table>
-	<div class="flex justify-center items-center gap-16 p-3">
+	<div class="flex justify-center items-center p-3 gap-3">
 		<Paginator
 			bind:settings={paginationSettings}
 			showFirstLastButtons={false}
 			showPreviousNextButtons={true}
-			class="flex justify-between items-center w-full"
 		/>
 		<a href="/pesquisar" class="btn h-10 variant-ghost-surface">
 			<span class="crieColor"><Search /></span>

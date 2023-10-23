@@ -6,7 +6,7 @@
 
 	const toastStore = getToastStore();
 
-	// Tipagem para dados
+	// Typing for data
 	interface User {
 		id: string;
 		name: string;
@@ -15,17 +15,17 @@
 	interface Data {
 		body: {
 			users: User[];
-			usersPix: any; // Adicione o tipo apropriado para usersPix
+			usersPix: any; // Add the appropriate type for usersPix
 		};
 	}
 
 	export let data: Data;
 
-	// Dados do usuário
+	// User data
 	let users: User[] = data.body.users;
 	let usersPix = data.body.usersPix;
 
-	// Dados de quem enviou ou recebeu o pix
+	// Data of who sent or received the PIX
 	let userReceiver: User = {
 		id: '',
 		name: ''
@@ -34,28 +34,26 @@
 		id: '',
 		name: ''
 	};
-	// Valor
+
+	// Value
 	let valor: string = '';
 
-	// Função para validar e enviar o Pix e find para encontrar o nome do usuário
+	// Mensagem de validação dos input
+	const validationMessages = {
+		emptyFields: 'Por favor, preencha todos os campos.',
+		sameUser: 'Não é possível enviar PIX para você mesmo.',
+		zeroOrLessValue: 'Não é possível fazer um Pix de R$0,00 ou menos.',
+		userNotFound: 'Remetente ou destinatário não encontrado.'
+	};
+
+	// Function to validate and send the PIX and find to locate the user's name
 	async function handleSubmit(): Promise<void> {
-		let t: any;
 		if (!userReceiver.id || !userSender.id || !valor) {
-			t = {
-				message: 'Por favor, preencha todos os campos.',
-				timeout: 5000
-			};
+			toastStore.trigger({ message: validationMessages.emptyFields, timeout: 5000 });
 		} else if (userReceiver.id === userSender.id) {
-			t = {
-				message: 'Não é possível enviar PIX para você mesmo.',
-				timeout: 5000
-			};
+			toastStore.trigger({ message: validationMessages.sameUser, timeout: 5000 });
 		} else if (Number(valor) <= 0) {
-			t = {
-				message: 'Não é possivel fazer um Pix de R$0,00 ou menos.',
-				timeout: 5000
-			};
-			toastStore.trigger(t);
+			toastStore.trigger({ message: validationMessages.zeroOrLessValue, timeout: 5000 });
 		} else {
 			const senderUser = users.find((user) => user.id === userSender.id);
 			const receiverUser = users.find((user) => user.id === userReceiver.id);
@@ -63,17 +61,12 @@
 			if (senderUser && receiverUser) {
 				userSender.name = senderUser.name;
 				userReceiver.name = receiverUser.name;
-				t = {
+				toastStore.trigger({
 					message: `PIX de ${valor} enviado de ${userSender.name} para ${userReceiver.name} com sucesso!`,
 					timeout: 5000
-				};
-				toastStore.trigger(t);
+				});
 			} else {
-				t = {
-					message: 'Remetente ou destinatário não encontrado.',
-					timeout: 5000
-				};
-				toastStore.trigger(t);
+				toastStore.trigger({ message: validationMessages.userNotFound, timeout: 5000 });
 			}
 		}
 	}

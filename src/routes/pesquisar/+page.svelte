@@ -102,12 +102,12 @@
 			<tr />
 		</tfoot>
 	</table>
-	<div class="flex w-full justify-center gap-20 items-center p-5">
+	<div class="flex w-full justify-center gap-8 items-center p-5">
 		<Paginator
 			bind:settings={paginationSettings}
 			showFirstLastButtons={true}
 			showPreviousNextButtons={true}
-			justify="justify-between w-1/4"
+			justify="flex"
 		/>
 		<span>TOTAL: <span class="crieColor">{usersPix.length}</span> </span>
 	</div>
