@@ -1,7 +1,9 @@
 # Baixe a aplicação:
 Rode: 
 > npm i
+
 ou
+
 > pnpm i
 
 # Apos a intalação:
